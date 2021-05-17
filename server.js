@@ -7,11 +7,11 @@ http
   if (request.url === "/create-directory") {
     fs.mkdir("content", function (error, data) {
       if (error) {
-        response.end(err);
+        response.end(error);
       } else {
         response.end("content folder created");
       }
-    });
+    }); 
   } 
   if (request.url === "/create-text" && request.method === "POST") {
     let body = "";
@@ -20,9 +20,9 @@ http
     });
     request.on("end", function () {
       let parsedBody = JSON.parse(body);
-      fs.writeFile("randomText.txt", "This is some foreign stuff, but I'm gonna get it, and make some money!", function (err) {
-        if (err) {
-          response.end(err);
+      fs.writeFile("randomText.txt", "This is some foreign stuff, but I'm gonna get it, and make some money!", function (error) {
+        if (error) {
+          response.end(error);
         } else {
           response.end("randomText.txt created");
         }
@@ -36,15 +36,15 @@ http
     });
     request.on("end", function () {
       let parsedBody = JSON.parse(body);
-      fs.readFile('randomText.txt', 'utf8' , (err, data) => {
-        if (err) {
+      fs.readFile('randomText.txt', 'utf8' , (error, data) => {
+        if (error) {
           response.error(error)
           return
         }
         
-        fs.writeFile("content/verbage.txt",data, function (err) {
-          if (err) {
-            response.end(err);
+        fs.writeFile("content/verbage.txt",data, function (error) {
+          if (error) {
+            response.end(error);
           } else {
             response.end("verbage.txt created");
           }
