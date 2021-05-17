@@ -19,7 +19,6 @@ http
       body += data.toString();
     });
     request.on("end", function () {
-      let parsedBody = JSON.parse(body);
       fs.writeFile("randomText.txt", "This is some foreign stuff, but I'm gonna get it, and make some money!", function (error) {
         if (error) {
           response.end(error);
@@ -35,14 +34,13 @@ http
       body += data.toString();
     });
     request.on("end", function () {
-      let parsedBody = JSON.parse(body);
       fs.readFile('randomText.txt', 'utf8' , (error, data) => {
         if (error) {
           response.error(error)
           return
         }
         
-        fs.writeFile("content/verbage.txt",data, function (error) {
+        fs.writeFile("content/verbage.txt", data, function (error) {
           if (error) {
             response.end(error);
           } else {
